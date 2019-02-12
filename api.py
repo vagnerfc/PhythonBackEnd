@@ -3,7 +3,6 @@ from flask import Flask
 from flask_restful import Resource, Api
 import sqlite3
 import json
-from pandas.io.json import json_normalize
 import os
 
 app = Flask(__name__)
@@ -14,7 +13,7 @@ class AppGenreController(Resource):
         data = pd.read_csv(".\DataFiles\AppleStore.csv") 
         data_music_and_book = data.loc[(data['prime_genre']=='Music') | (data['prime_genre']=='Book')].sort_values(['rating_count_tot'],ascending=False).head(n=10)
         db = sqlite3.connect('.\DataFiles\db')
-        
+            
         df = pd.DataFrame({'id':data_music_and_book.id,
                    'track_name': data_music_and_book.track_name,
                    'n_citacoes':data_music_and_book.rating_count_tot,
