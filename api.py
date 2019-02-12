@@ -14,7 +14,6 @@ class AppGenreController(Resource):
         data = pd.read_csv(".\DataFiles\AppleStore.csv") 
         data_music_and_book = data.loc[(data['prime_genre']=='Music') | (data['prime_genre']=='Book')].sort_values(['rating_count_tot'],ascending=False).head(n=10)
         db = sqlite3.connect('.\DataFiles\db')
-        cursor = db.cursor()
         
         df = pd.DataFrame({'id':data_music_and_book.id,
                    'track_name': data_music_and_book.track_name,
